@@ -7,6 +7,12 @@ class Particle {
     }
 
     render(canvas) {
+        const ctx = canvas.getContext("2d")
+
+        ctx.fillStyle = this.color 
+        ctx.beginPath()
+        ctx.arg(this.position.x, this.position.y, 0, Math.PI * 2)
+        ctx.fill()
     }
 
     update(canvas) {
