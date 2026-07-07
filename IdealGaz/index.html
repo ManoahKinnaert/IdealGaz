@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>IdealGaz</title>
     <link rel="stylesheet" href="style/index.css">
 </head>
+
 <body>
     <div class="header">
         <h1>Ideal Gaz</h1>
@@ -15,13 +17,34 @@
         <div class="center">
             <canvas id="gaz-container" width="400" height="400"></canvas>
         </div>
-        
+        <!-- Particle amount slider (n slider) -->
+        <div class="n-slider-container">
+            <p>Slide to change n:</p>
+            <input type="range" id="slider" min="5" max="50" step="10" value="5" />
+        </div>
+        <!-- Pressure slider -->
+        <div class="pressure-slider-container">
+            <p>Slide to change the pressure p:</p>
+            <input type="range" id="slider" min="1000" max="1500" step="100" value="1000" />
+        </div>
+        <!-- Temperature slider -->
+        <div class="temperature-slider-container">
+            <p>Slide to change the temperature T: </p>
+            <!-- For this case we make reaching 0 Kelvin impossible real minimum is 3. -->
+            <input type="range" id="slider" min="0" max="373" step="10" value="273" />
+        </div>
+        <!-- Volume slider -->
+         <div class="volume-slider-container">
+            <p>Slide to change container volume V: </p>
+           <input type="range" id="slider" min="200" max="800" step="20" value="400" /> 
+         </div>
     </div>
     <div class="footer">
 
     </div>
 
     <!-- Load scripts -->
-     <script type="module" src="scripts/index.js"></script>
+    <script type="module" src="scripts/index.js"></script>
 </body>
+
 </html>

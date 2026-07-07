@@ -4,6 +4,10 @@ body {
     margin: 0;
 }
 
+p {
+    color: white;  
+}
+
 .header {
     background-color: rgb(30, 30, 30);
     padding: 10px;
