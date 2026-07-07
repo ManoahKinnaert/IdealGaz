@@ -6,6 +6,7 @@ let PRESSURE = 1000
 let T = 273
 
 const canvas = document.getElementById("gaz-container")
+const canvasMinHeight = 200
 canvas.width = 400
 canvas.height = 400
 var ctx = canvas.getContext("2d");
@@ -30,12 +31,16 @@ NSlider.addEventListener("input", () => {
     }
 })
 
+TSlider.addEventListener("input", () => { T = TSlider.value })
+PSlider.addEventListener("input", () => { PRESSURE = PSlider.value })
+VSlider.addEventListener("input", () => { canvas.height = VSlider.value })
+
 function randomInt(min, max) {
     return Math.floor(Math.random() * (max - min)) + min;
 }
 
 function spawnNew(radius=10) {
-    let particle = new Particle(radius, new Point(randomInt(20, canvas.width - 20), randomInt(20, canvas.height - 20)), PRESSURE, T)
+    let particle = new Particle(radius, new Point(randomInt(20, canvas.width - 20), randomInt(20, canvasMinHeight - 20)), PRESSURE, T)
     particles.push(particle)
 }
 
@@ -44,7 +49,7 @@ function spawnN(n=5) {
 }
 
 function update(val, index, array) {
-    val.update(canvas)
+    val.update(canvas, PRESSURE, T)
 }
 
 function render(val, index, array) {

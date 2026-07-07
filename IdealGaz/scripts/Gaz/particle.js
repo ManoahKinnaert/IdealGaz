@@ -20,18 +20,26 @@ class Particle {
         ctx.fill()
     }
 
-    update() {
+    update(canvas, pressure, temperature) {
+        if (pressure != this.pressure || temperature != this.temperature) {
+            this.pressure = pressure
+            this.temperature = temperature
+            this.color = this.computeColor()
+        }
+
+
     }
 
     computeColor() {
-        const p = this.pressure / 1000
-        const t = Math.min(Math.max((this.temperature - 200) / 200, 0), 1)
+        const p = Math.min(Math.max((this.pressure - 1000) / 300, 0), 1)
+        const t = Math.min(Math.max(this.temperature / 373, 0), 1)
+        const h = Math.min(p + t * 0.5, 1)
 
-        const r = Math.round((generateRandom(60, 90) + 80 * t) * p)
-        const g = Math.round((generateRandom(155, 240) + 20 * (1 - Math.abs(t - 0.5) * 2)) * p)
-        const b = Math.round((250 - 100 * t) * p)
+        const r = 40 + 215 * h
+        const g = 220 - 190 * h
+        const b = 255 - 240 * h
 
-        return `rgb(${Math.min(r, 255)}, ${Math.min(g, 255)}, ${Math.min(b, 255)})`
+        return `rgb(${r | 0}, ${Math.max(0, g | 0)}, ${Math.max(0, b | 0)})`
     }
 }
 
