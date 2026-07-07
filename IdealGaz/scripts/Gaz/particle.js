@@ -1,3 +1,5 @@
+import { Vector } from './math/vector.js'
+
 function generateRandom(min, max) {
     return Math.random() * (max - min) + min
 }
@@ -9,6 +11,7 @@ class Particle {
         this.temperature = temperature
         this.pressure = pressure
         this.color = this.computeColor()
+        this.velocity = new Vector(generateRandom(-5, 5), generateRandom(-5, 5))
     }
 
     render(canvas) {
@@ -26,6 +29,34 @@ class Particle {
             this.temperature = temperature
             this.color = this.computeColor()
         }
+        // movement
+        // right wall
+        if (this.position.x + this.size >= canvas.width) {
+            this.position.x = canvas.width - this.size;
+            this.velocity.bounce_east();
+        }
+
+        // left wall
+        if (this.position.x - this.size <= 0) {
+            this.position.x = this.size;
+            this.velocity.bounce_west();
+        }
+
+        // bottom wall
+        if (this.position.y + this.size >= canvas.height) {
+            this.position.y = canvas.height - this.size;
+            this.velocity.bounce_south();
+        }
+
+        // top wall
+        if (this.position.y - this.size <= 0) {
+            this.position.y = this.size;
+            this.velocity.bounce_north();
+        }
+
+        // move ball
+        this.position.x += this.velocity.x;
+        this.position.y += this.velocity.y;
 
 
     }
