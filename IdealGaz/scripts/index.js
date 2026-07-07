@@ -2,7 +2,6 @@ import { Particle } from './Gaz/particle.js'
 import { Point } from './Gaz/math/point.js'
 import { Vector } from './Gaz/math/vector.js'
 
-
 let PRESSURE = 1000
 let T = 273
 
@@ -14,6 +13,23 @@ var ctx = canvas.getContext("2d");
 let particles = []
 let running = true 
 
+// sliders
+const NSlider = document.getElementById("n-slider")
+const TSlider = document.getElementById("T-slider")
+const PSlider = document.getElementById("p-slider")
+const VSlider = document.getElementById("V-slider")
+
+// slider events
+NSlider.addEventListener("input", () => {
+    let currentAmount = particles.length 
+    let delta = currentAmount - NSlider.value 
+    if (delta >= 0) {
+        for (let i=0; i < delta; i++) particles.pop()
+    } else {
+        spawnN(-delta)
+    }
+})
+
 function randomInt(min, max) {
     return Math.floor(Math.random() * (max - min)) + min;
 }
@@ -24,6 +40,7 @@ function spawnNew(radius=10) {
 }
 
 function spawnN(n=5) {
+    for (let i=0; i < n; i++) spawnNew()
 }
 
 function update(val, index, array) {
@@ -31,6 +48,7 @@ function update(val, index, array) {
 }
 
 function render(val, index, array) {
+   
     val.render(canvas)
 }
 
@@ -39,7 +57,6 @@ function runloop() {
 
     particles.forEach(update)
     particles.forEach(render)
-
     if (running) requestAnimationFrame(runloop)
 }
 
