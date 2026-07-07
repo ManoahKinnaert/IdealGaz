@@ -9,10 +9,30 @@ body {
     padding: 10px;
     margin: 0;
     text-align: center;
-    
+
 }
 
 .header h1 {
     color: white;
     font-weight: bold;
+}
+
+#gaz-container {
+    background-color: black;
+    outline: rgb(200, 200, 200) 1px solid;
+}
+
+#gaz-container-title {
+    color: white;
+}
+
+.content {
+    margin-top: 50px;
+    text-align: center;
+}
+
+.center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
